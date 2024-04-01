@@ -1,0 +1,202 @@
+/// thx to https://github.com/KittyGiraudel/SassyStrings/blob/master/stylesheets/private/_str-repeat.scss
+/// Repeat `$string` `$times` times.
+/// @since 1.2.0
+/// @param {String} $string - string to repeat
+/// @param {Number} $times  - number of times to repeat $string
+/// @return {String}
+
+@function _ss-str-repeat($string, $times) {
+    $result: "";
+
+    @for $i from 1 through $times {
+        $result: $result + $string;
+    }
+
+    @return $result;
+}
+
+@mixin md($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color) {
+
+
+    $font-weight: 600;
+
+    .markdown-body {
+        background-color: $primary-background-color;
+        color: $primary-font-color;
+
+        // Headings
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            // padding-top: 24px;
+            padding-bottom: 16px;
+            font-weight: $font-weight;
+            line-height: 1.25
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        h3 {
+            font-size: 1.25em;
+        }
+
+        h4 {
+            font-size: 1em;
+        }
+
+        h5 {
+            font-size: .875em;
+        }
+
+        h6 {
+            font-size: .85em;
+        }
+
+        // Lists
+        ol {
+            list-style: inside;
+            list-style-type: decimal;
+            list-style-position: outside;
+            margin-left: 2rem;
+        }
+
+        ol>li>ol {
+            list-style-type: lower-alpha;
+        }
+
+        ul {
+            list-style: inside;
+            list-style-type: disc;
+            list-style-position: outside;
+            margin-left: 2rem;
+        }
+
+        li::marker {
+            color: $secondary-font-color;
+        }
+
+        $list-style-types: circle, square, "❖ ", "- ", "⇒ ", "➤ ", "➔ ", "➜ ", "➨ ", "➠ ", "➟ ", "➝ ", "➥ ", "➦ ", "➧ ", "➩ ", "➪ ", "➫ ", "➬ ", "➭ ", "➮ ", "➯ ", "➱ ";
+
+        @for $i from 1 through length($list-style-types) {
+            $list-style-type: nth($list-style-types, $i);
+            $selector: "ul " + _ss-str-repeat("> li > ul", $i);
+
+            #{$selector} {
+                list-style-type: $list-style-type;
+                margin-left: 1.75rem;
+            }
+        }
+
+        // Tables
+        table {
+            border-collapse: collapse;
+            min-width: 30rem;
+            margin: .5rem auto .5rem auto;
+
+            thead {
+                background-color: $secondary-background-color;
+
+                tr:first-of-type {
+                    color: $primary-font-color;
+                }
+
+                tr {
+                    color: $secondary-font-color;
+                }
+            }
+
+            tbody {
+                tr {
+                    border-bottom: 0.15rem solid $secondary-background-color;
+
+                }
+
+                tr:last-of-type {
+                    border-bottom: 0.25rem solid $secondary-background-color;
+                }
+                td[colspan] {
+                    text-align: center;
+                }
+            }
+        }
+
+        // Code
+        code {
+            background-color: $secondary-background-color;
+            border-radius: 0.25rem;
+            color: $secondary-accent-color;
+            display: inline-block;
+            .hljs-punctuation, .hljs-attr {
+                color: $primary-accent-color;
+            }
+            .hljs-string {
+                color: $secondary-accent-color;
+            
+            }
+            .hljs-literal {
+                color: lighten($secondary-accent-color, 10%)
+            }
+        }
+        pre > code {
+            width: 100%;
+            overflow-x: auto;
+            padding: 0.5rem;
+        }
+        pre:has(> code) {
+            padding: 0.5rem;
+        }
+
+        // Blockquotes
+        blockquote {
+            background-color: $secondary-background-color;
+            padding-left: 1rem;
+            border-left: .25rem solid $primary-accent-color;
+            margin: .5rem 0;
+        }
+
+        // Links
+        a {
+            color: $primary-accent-color;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@media screen {
+    $primary-font-color: #000000;
+    $secondary-font-color: #5c5b5b;
+    $primary-background-color: #FBFAEE;
+    $secondary-background-color: darken($primary-background-color, 50%);
+    $secondary-background-color: #{$secondary-background-color}10;
+    $primary-accent-color: #933DC9;
+    $secondary-accent-color: #53118F;
+
+    @include md($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+    @import url("../public/JetBrainsMono-Regular.ttf");
+
+    * {
+        font-family: "JetBrains Mono";
+    }
+
+    .markdown-body {
+        @for $i from 1 through 6 {
+            h#{$i}::before {
+                content: _ss-str-repeat("#", $i);
+                margin-right: .25rem;
+                color: $secondary-font-color;
+            }
+        }
+    }
+}
