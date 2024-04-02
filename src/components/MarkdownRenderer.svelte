@@ -4,12 +4,13 @@
     import highlightjs from "markdown-it-highlightjs";
     import ancher from "markdown-it-anchor";
     import "../markdown.scss";
-    import "../../public/katex/katex.css"
+    import "../../public/katex/katex.css";
     import link_plugin from "../markdown-it-plugins/LinkPlugin";
     import mermaid_plugin from "../markdown-it-plugins/MermaidPlugin";
     import mermaid from "mermaid";
     import { afterUpdate } from "svelte";
     import katex_plugin from "../markdown-it-plugins/KatexPlugin";
+    import image_plugin from "../markdown-it-plugins/ImagePlugin";
 
     const md = new MarkdownIt({
         html: true,
@@ -27,7 +28,9 @@
     md.use(ancher, {});
     md.use(link_plugin);
     md.use(mermaid_plugin);
-    md.use(katex_plugin, {})
+    md.use(katex_plugin, {});
+    export let workspace = "";
+    md.use(image_plugin, { workspace: workspace });
     export let markdown_text = "";
     let renderedMarkdown = md.render(markdown_text);
 

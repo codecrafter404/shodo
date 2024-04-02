@@ -19,6 +19,11 @@
       "fs": {
         "all": true,
         "scope": ["**"]
+      },
+      "protocol": {
+        "all": false,
+        "asset": true,
+        "assetScope": ["**"]
       }
     },
     "windows": [
@@ -29,7 +34,7 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost"
     },
     "bundle": {
       "active": true,
@@ -41,6 +46,17 @@
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
+      ]
+    },
+    "cli": {
+      "description": "open shodo",
+      "args": [
+        {
+          "name": "path",
+          "index": 1,
+          "required": true,
+          "takesValue": true
+        }
       ]
     }
   }

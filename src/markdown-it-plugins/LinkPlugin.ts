@@ -12,7 +12,8 @@ export default function link_plugin(md: MarkdownIt): void {
         let href = link.attrGet("href") || "";
         let url = new URL(href, "https://localhost/");
 
-        if (url.hostname !== "localhost") {
+        const http_schemes = ["http:", "https:"];
+        if (url.hostname !== "localhost" && http_schemes.includes(url.protocol)) {
             tokens[idx].attrSet("target", "_blank");
         }
         // pass token to default renderer.

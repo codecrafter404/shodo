@@ -171,6 +171,16 @@
                 text-decoration: underline;
             }
         }
+
+        // Mermaid
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        img {
+            max-height: 30rem;
+            margin-inline: auto;
+        }
     }
 }
 

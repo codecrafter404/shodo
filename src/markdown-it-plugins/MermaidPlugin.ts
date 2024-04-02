@@ -11,7 +11,7 @@ export default function mermaid_plugin(md: MarkdownIt): void {
 		const token = tokens[idx];
 		if (token.info === 'mermaid') {
 			const code = token.content.trim();
-			return `<pre class="mermaid" style="display:flex;justify-content: center;">${code}</pre>`;
+			return `<pre class="mermaid">${code}</pre>`;
 		}
 		// Other languages
 		return defaultRender(tokens, idx, options, env, self);
