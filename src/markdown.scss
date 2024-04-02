@@ -32,7 +32,7 @@
         h5,
         h6 {
             // padding-top: 24px;
-            padding-bottom: 16px;
+            padding-top: 16px;
             font-weight: $font-weight;
             line-height: 1.25
         }
@@ -186,7 +186,7 @@
     @include md($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
     @import url("../public/JetBrainsMono-Regular.ttf");
 
-    * {
+    body {
         font-family: "JetBrains Mono";
     }
 

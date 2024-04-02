@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1",
+    "katex": "^0.16.10",
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^8.6.7",
     "markdown-it-highlightjs": "^4.0.1",
@@ -23,6 +24,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "@tauri-apps/cli": "^1",
     "@tsconfig/svelte": "^5.0.2",
+    "@types/katex": "^0.16.7",
     "@types/markdown-it": "^13.0.7",
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.19",
