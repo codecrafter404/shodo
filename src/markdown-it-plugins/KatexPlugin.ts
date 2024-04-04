@@ -41,7 +41,6 @@ function isValidDelim(state: any, pos: number) {
 
 function math_inline(state: any, silent: boolean) {
   let match, token, res, pos
-
   if (state.src[state.pos] !== '$')
     return false
 

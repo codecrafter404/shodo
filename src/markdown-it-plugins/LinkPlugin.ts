@@ -7,7 +7,6 @@ import type StateCore from "markdown-it/lib/rules_core/state_core"
 export default function link_plugin(md: MarkdownIt): void {
     var defaultRender = md.renderer.rules.link_open || this.defaultRender;
     md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
-
         let link = tokens[idx];
         let href = link.attrGet("href") || "";
         let url = new URL(href, "https://localhost/");

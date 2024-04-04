@@ -17,7 +17,6 @@ export default function image_plugin(md: MarkdownIt, opts: ImagePluginOptions): 
         let image = tokens[idx];
         let href = image.attrGet("src") || "";
         let url = new URL(href, "https://localhost/");
-        console.log(url);
 
         if (url.hostname === "localhost") {
             let path = opts.workspace + url.pathname;

@@ -123,6 +123,7 @@
                 tr:last-of-type {
                     border-bottom: 0.25rem solid $secondary-background-color;
                 }
+
                 td[colspan] {
                     text-align: center;
                 }
@@ -135,28 +136,34 @@
             border-radius: 0.25rem;
             color: $secondary-accent-color;
             display: inline-block;
-            .hljs-punctuation, .hljs-attr {
+
+            .hljs-punctuation,
+            .hljs-attr {
                 color: $primary-accent-color;
             }
+
             .hljs-string {
                 color: $secondary-accent-color;
-            
+
             }
+
             .hljs-literal {
                 color: lighten($secondary-accent-color, 10%)
             }
         }
-        pre > code {
+
+        pre>code {
             width: 100%;
             overflow-x: auto;
             padding: 0.5rem;
         }
+
         pre:has(> code) {
             padding: 0.5rem;
         }
 
         // Blockquotes
-        blockquote {
+        blockquote:not(.heading-link-blockquote) {
             background-color: $secondary-background-color;
             padding-left: 1rem;
             border-left: .25rem solid $primary-accent-color;
@@ -167,6 +174,7 @@
         a {
             color: $primary-accent-color;
             text-decoration: none;
+
             &:hover {
                 text-decoration: underline;
             }
@@ -177,9 +185,60 @@
             display: flex;
             justify-content: center;
         }
+
         img {
             max-height: 30rem;
             margin-inline: auto;
+        }
+
+        // Heading Links
+        .heading-link-indicator {
+            display: none;
+        }
+
+        a.heading-link-item {
+            background-color: #{$secondary-accent-color}10;
+            padding: .25rem .25rem;
+            text-overflow: ellipsis;
+            border-radius: .25rem;
+            max-width: 20rem;
+            overflow: hidden;
+
+            &:hover {
+                text-decoration: none;
+                background-color: #{$secondary-accent-color}20;
+            }
+
+            &::before {
+                content: "";
+                padding-left: 1.4rem;
+                margin-right: .25rem;
+            }
+
+            &.mask-image {
+                &::before {
+                    background-color: $primary-accent-color;
+                    mask-image: var(--background);
+                    mask-size: contain;
+                    mask-repeat: no-repeat;
+                    mask-position: center center;
+                }
+            }
+
+            &.full-image {
+                &::before {
+                    background-image: var(--background);
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                }
+            }
+        }
+
+        .heading-link-blockquote>p:not(.heading-link-indicator) {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
         }
     }
 }

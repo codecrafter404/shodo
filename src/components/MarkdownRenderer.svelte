@@ -11,6 +11,7 @@
     import { afterUpdate } from "svelte";
     import katex_plugin from "../markdown-it-plugins/KatexPlugin";
     import image_plugin from "../markdown-it-plugins/ImagePlugin";
+    import heading_link_plugin from "../markdown-it-plugins/HeadingLinksPlugin";
 
     const md = new MarkdownIt({
         html: true,
@@ -31,8 +32,12 @@
     md.use(katex_plugin, {});
     export let workspace = "";
     md.use(image_plugin, { workspace: workspace });
+    md.use(heading_link_plugin, {});
+    
     export let markdown_text = "";
     let renderedMarkdown = md.render(markdown_text);
+
+
 
     afterUpdate(() => {
         mermaid.initialize({

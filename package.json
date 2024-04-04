@@ -18,6 +18,7 @@
     "markdown-it-highlightjs": "^4.0.1",
     "markdown-it-multimd-table": "^4.2.3",
     "mermaid": "^10.9.0",
+    "parse-domain": "^8.0.2",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
