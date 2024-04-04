@@ -1,33 +1,98 @@
 <script lang="ts">
-  import { getMatches } from "@tauri-apps/api/cli";
-  import MarkdownRenderer from "./components/MarkdownRenderer.svelte";
-  import { loadFile } from "./lib/FileLoader";
+  import MarkdownReader from "./components/MarkdownReader.svelte";
+  import TreeNode from "./components/TreeNode.svelte";
 
-  async function getMarkdonwn(): Promise<[string, string]> {
-    let matches = await getMatches();
-    let base = matches.args["path"].value?.toString() || "";
-    let path = window.location.pathname;
-    let file = base + path;
-    let content = await loadFile(file);
-    return [content, base];
-  }
+  let node: FileTreeNode = {
+    name: "hello",
+    icon: "/icons/folder.svg",
+    path: "/",
+    children: [
+      {
+        name: "world",
+        icon: "/icons/folder.svg",
+        path: "/world/",
+        children: [
+          {
+            name: "world",
+            icon: "/icons/folder.svg",
+            path: "/world/",
+            children: [
+              {
+                name: "world",
+                icon: "/icons/folder.svg",
+                path: "/world/",
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "world",
+        icon: "/icons/folder.svg",
+        path: "/world/",
+        children: [
+          {
+            name: "world",
+            icon: "/icons/folder.svg",
+            path: "/world/",
+            children: [
+              {
+                name: "world",
+                icon: "/icons/folder.svg",
+                path: "/world/",
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "world",
+        icon: "/icons/folder.svg",
+        path: "/world/",
+        children: [
+          {
+            name: "world",
+            icon: "/icons/folder.svg",
+            path: "/world/",
+            children: [
+              {
+                name: "world",
+                icon: "/icons/folder.svg",
+                path: "/world/",
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "world",
+        icon: "/icons/folder.svg",
+        path: "/world/",
+        children: [
+          {
+            name: "world",
+            icon: "/icons/folder.svg",
+            path: "/world/",
+            children: [
+              {
+                name: "world",
+                icon: "/icons/folder.svg",
+                path: "/world/",
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
 </script>
 
-<main class="container">
-  {#await getMarkdonwn()}
-    <!-- promise is pending -->
-    <p>Loading...</p>
-  {:then [content, workspace]}
-    <!-- promise was fulfilled -->
-    <MarkdownRenderer markdown_text={content} workspace={workspace} />
-  {:catch error}
-    <!-- promise was rejected -->
-    <p>{error}</p>
-  {/await}
-</main>
+<!-- <MarkdownReader /> -->
+<TreeNode {node} />
 
 <style>
-  .container {
-    margin: auto;
-  }
 </style>

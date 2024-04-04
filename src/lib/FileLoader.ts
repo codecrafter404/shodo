@@ -18,3 +18,10 @@ export async function loadFile(path: string): Promise<string> {
     let content = await fileLoader.getFileForPath(path);
     return content;
 }
+export async function getFileLocation(): Promise<[string, string, string]> {
+    let matches = await getMatches();
+    let base = matches.args["path"].value?.toString() || "";
+    let path = window.location.pathname;
+    let file = base + path;
+    return [file, base, path];
+}
