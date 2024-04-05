@@ -150,10 +150,13 @@ function parse(state: StateCore): boolean {
 
         ]
 
+        const protocol_mappings: [string, boolean, string][] = [
+            ["onenote:", true, "/icons/heading-links/onenote.svg"]
+        ]
 
         if (links.children !== null) {
             let i = 0;
-            while(i < links.children.length) {
+            while (i < links.children.length) {
                 let x = links.children[i];
                 if (x.type === "link_open") {
                     x.attrJoin("class", "heading-link-item")
@@ -164,7 +167,13 @@ function parse(state: StateCore): boolean {
                     let img = "";
                     let is_full_image = false;
                     let is_web = uri.hostname !== "localhost";
-                    if (is_web) {
+                    let proto = protocol_mappings.find((x) => x[0] === uri.protocol);
+
+                    if (proto !== undefined) {
+                        img = proto[2];
+                        is_full_image = proto[1];
+                        console.log(uri);
+                    } else if (is_web) {
                         img = "/icons/heading-links/link.svg";
                         let domain = parseDomain(uri.hostname);
                         switch (domain.type) {
@@ -203,19 +212,36 @@ function parse(state: StateCore): boolean {
                     x.attrSet("img-source", img);
 
                     let text = links.children[i + 1];
-                    if(text.type === "link_close") { // no text
-                        if(!is_web) {
+                    if (text.type === "link_close") { // no text
+                        if (!is_web || (proto !== undefined)) {
                             let url = x.attrGet("href") || "/";
-                                url = url.replace("\\", "/");
+                            url = url.replace("\\", "/");
                             let uri = new URL(url, "http://localhost/");
                             let filename_arr = uri.pathname.split("/");
-                            if(filename_arr.length > 0) {
-                                let filename = filename_arr[filename_arr.length -1];
-                                if(filename.trim() !== "") {
+                            if (filename_arr.length > 0) {
+                                let filename = filename_arr[filename_arr.length - 1];
+                                filename = decodeURIComponent(filename);
+                                if (filename.trim() !== "") {
                                     let token = new Token("text", "", 0);
                                     token.content = filename;
                                     links.children.splice(i + 1, 0, token);
                                 }
+                            }
+                        } else if (is_web) {
+                            let token = new Token("text", "", 0);
+                            token.content = url;
+                            links.children.splice(i + 1, 0, token);
+                        }
+                    } else if (text.type === "text") {
+                        if (proto !== undefined) {
+                            let url = x.attrGet("href") || "/";
+                            url = url.replace("\\", "/");
+                            let uri = new URL(url, "http://localhost/");
+                            let files = uri.pathname.split("/");
+                            if (files.length > 0) {
+                                let name = files[files.length - 1];
+                                name = decodeURIComponent(name);
+                                text.content = name;
                             }
                         }
                     }

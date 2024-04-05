@@ -201,7 +201,9 @@
             padding: .25rem .25rem;
             text-overflow: ellipsis;
             border-radius: .25rem;
+            white-space: nowrap;
             max-width: 20rem;
+            max-height: 2rem;
             overflow: hidden;
 
             &:hover {
