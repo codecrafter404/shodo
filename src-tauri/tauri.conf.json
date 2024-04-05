@@ -14,7 +14,7 @@
       "all": false,
       "shell": {
         "all": false,
-        "open": true
+        "open": ".*"
       },
       "fs": {
         "all": true,
@@ -24,6 +24,14 @@
         "all": false,
         "asset": true,
         "assetScope": ["**"]
+      },
+      "dialog": {
+        "all": false,
+        "ask": false,
+        "confirm": false,
+        "message": true,
+        "open": false,
+        "save": false
       }
     },
     "windows": [

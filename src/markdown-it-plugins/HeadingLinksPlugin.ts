@@ -219,7 +219,7 @@ function parse(state: StateCore): boolean {
                     if (text.type === "link_close") { // no text
                         if (!is_web || (proto !== undefined)) {
                             let url = x.attrGet("href") || "/";
-                            url = url.replace("\\", "/");
+                            url = url.replaceAll("\\", "/");
                             let uri = new URL(url, "http://localhost/");
                             let filename_arr = uri.pathname.split("/");
                             if (filename_arr.length > 0) {
@@ -239,7 +239,7 @@ function parse(state: StateCore): boolean {
                     } else if (text.type === "text") {
                         if (proto !== undefined) {
                             let url = x.attrGet("href") || "/";
-                            url = url.replace("\\", "/");
+                            url = url.replaceAll("\\", "/");
                             let uri = new URL(url, "http://localhost/");
                             let files = uri.pathname.split("/");
                             if (files.length > 0) {

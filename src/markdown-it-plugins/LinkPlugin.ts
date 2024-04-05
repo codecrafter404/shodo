@@ -14,6 +14,8 @@ export default function link_plugin(md: MarkdownIt): void {
         const http_schemes = ["http:", "https:"];
         if (url.hostname !== "localhost" && http_schemes.includes(url.protocol)) {
             tokens[idx].attrSet("target", "_blank");
+        }else if(url.search === "" && http_schemes.includes(url.protocol) && !url.pathname.endsWith(".md") && url.pathname !== "/") {
+            tokens[idx].attrSet("open", "app");
         }
         // pass token to default renderer.
         return defaultRender(tokens, idx, options, env, self);

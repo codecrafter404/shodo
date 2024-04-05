@@ -12,6 +12,10 @@
     import katex_plugin from "../markdown-it-plugins/KatexPlugin";
     import image_plugin from "../markdown-it-plugins/ImagePlugin";
     import heading_link_plugin from "../markdown-it-plugins/HeadingLinksPlugin";
+    import type { MouseEventHandler } from "svelte/elements";
+    import { open } from "@tauri-apps/api/shell";
+    import { dialog } from "@tauri-apps/api";
+    import { message } from "@tauri-apps/api/dialog";
 
     const md = new MarkdownIt({
         html: true,
@@ -33,11 +37,9 @@
     export let workspace = "";
     md.use(image_plugin, { workspace: workspace });
     md.use(heading_link_plugin, {});
-    
+
     export let markdown_text = "";
     let renderedMarkdown = md.render(markdown_text);
-
-
 
     afterUpdate(() => {
         mermaid.initialize({
@@ -48,9 +50,47 @@
         });
         mermaid.run();
     });
+    async function on_click(event: PointerEvent) {
+        let target = event.target as HTMLElement;
+        // event.preventDefault();
+        // console.log(event);
+
+        if (target.getAttribute("open") !== "app" || target.nodeName !== "A") {
+            if (
+                target.parentElement !== null &&
+                target.parentElement.getAttribute("open") === "app" &&
+                target.parentElement.nodeName === "A"
+            ) {
+                target = target.parentElement;
+            } else {
+                return;
+            }
+        }
+        event.preventDefault();
+        let path = workspace.replaceAll("\\", "/");
+        if (!path.endsWith("/")) {
+            path = `${path}/`;
+        }
+        let link = (target.getAttribute("href") || "/").replaceAll("\\", "/");
+
+        if (link.startsWith("/")) {
+            link = link.slice(1);
+        }
+        let file = path + link;
+        console.log(file);
+        try {
+            await open(file);
+        } catch (e: any) {
+            console.log(e);
+            await message("The file doesn't seem to exist anymore :(", {
+                title: "File not found",
+                type: "error",
+            });
+        }
+    }
 </script>
 
-<div class="markdown-body">
+<div class="markdown-body" on:click={on_click}>
     {@html renderedMarkdown}
 </div>
 
