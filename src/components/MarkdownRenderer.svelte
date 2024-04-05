@@ -90,6 +90,8 @@
     }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="markdown-body" on:click={on_click}>
     {@html renderedMarkdown}
 </div>
