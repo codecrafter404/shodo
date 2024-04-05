@@ -63,6 +63,8 @@ function parse(state: StateCore): boolean {
 
             ["pdf", false, "/icons/heading-links/pdf.svg"],
 
+            ["rnote", true, "/icons/heading-links/rnote.svg"],
+
             ["doc", true, "/icons/heading-links/word.svg"],
             ["docm", true, "/icons/heading-links/word.svg"],
             ["docx", true, "/icons/heading-links/word.svg"],
@@ -90,6 +92,8 @@ function parse(state: StateCore): boolean {
             ["xlt", true, "/icons/heading-links/excel.svg"],
             ["xltm", true, "/icons/heading-links/excel.svg"],
             ["xltx", true, "/icons/heading-links/excel.svg"],
+            
+            ["one", true, "/icons/heading-links/onenote.svg"],
 
             ["jpeg", false, "/icons/heading-links/image.svg"],
             ["jpg", false, "/icons/heading-links/image.svg"],
