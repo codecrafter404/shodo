@@ -4,6 +4,7 @@ import type StateBlock from "markdown-it/lib/rules_block/state_block";
 import type StateCore from "markdown-it/lib/rules_core/state_core";
 import Token from "markdown-it/lib/token";
 import { ParseResultType, parseDomain } from "parse-domain";
+import { normalize_path } from "../lib/FileUtils";
 
 export default function heading_link_plugin(md: MarkdownIt): void {
     md.core.ruler.push('heading_link', parse);
@@ -195,7 +196,7 @@ function parse(state: StateCore): boolean {
                         }
                     } else {
                         img = "/icons/heading-links/file.svg"
-                        let path = uri.pathname;
+                        let path = normalize_path(uri.pathname);
                         let ext = path.split(".");
                         if (ext.length >= 1) {
                             let mapping = file_mappings.find((x) => x[0] === ext[ext.length - 1]);
@@ -219,7 +220,7 @@ function parse(state: StateCore): boolean {
                     if (text.type === "link_close") { // no text
                         if (!is_web || (proto !== undefined)) {
                             let url = x.attrGet("href") || "/";
-                            url = url.replaceAll("\\", "/");
+                                url = normalize_path(url);
                             let uri = new URL(url, "http://localhost/");
                             let filename_arr = uri.pathname.split("/");
                             if (filename_arr.length > 0) {

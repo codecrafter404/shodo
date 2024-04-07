@@ -1,5 +1,6 @@
 import type MarkdownIt from "markdown-it/lib"
 import type StateCore from "markdown-it/lib/rules_core/state_core"
+import { normalize_path } from "../lib/FileUtils";
 
 /**
  * An link plugin that adds a target = _blank to all external links
@@ -9,6 +10,7 @@ export default function link_plugin(md: MarkdownIt): void {
     md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
         let link = tokens[idx];
         let href = link.attrGet("href") || "";
+            href = normalize_path(href);
         let url = new URL(href, "https://localhost/");
 
         const http_schemes = ["http:", "https:"];

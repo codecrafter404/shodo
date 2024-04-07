@@ -1,6 +1,7 @@
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 import type MarkdownIt from "markdown-it/lib"
 import type StateCore from "markdown-it/lib/rules_core/state_core"
+import { concat_paths } from "../lib/FileUtils";
 
 
 interface ImagePluginOptions{
@@ -19,7 +20,7 @@ export default function image_plugin(md: MarkdownIt, opts: ImagePluginOptions): 
         let url = new URL(href, "https://localhost/");
 
         if (url.hostname === "localhost") {
-            let path = opts.workspace + url.pathname;
+            let path = concat_paths(opts.workspace, url.pathname);
             let src = convertFileSrc(path);
             image.attrSet("src", src);
         }

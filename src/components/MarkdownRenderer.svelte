@@ -16,6 +16,7 @@
     import { open } from "@tauri-apps/api/shell";
     import { dialog } from "@tauri-apps/api";
     import { message } from "@tauri-apps/api/dialog";
+    import { concat_paths } from "../lib/FileUtils";
 
     const md = new MarkdownIt({
         html: true,
@@ -67,16 +68,8 @@
             }
         }
         event.preventDefault();
-        let path = workspace.replaceAll("\\", "/");
-        if (!path.endsWith("/")) {
-            path = `${path}/`;
-        }
-        let link = (target.getAttribute("href") || "/").replaceAll("\\", "/");
-
-        if (link.startsWith("/")) {
-            link = link.slice(1);
-        }
-        let file = path + link;
+        let link = target.getAttribute("href") || "/";
+        let file = concat_paths(workspace, link);
         console.log(file);
         try {
             await open(file);

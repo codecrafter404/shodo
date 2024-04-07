@@ -3,6 +3,7 @@
   import MarkdownRenderer from "./components/MarkdownRenderer.svelte";
   import { loadFile } from "./lib/FileLoader";
     import { apply_color_scheme } from "./lib/ColorUtil";
+    import { concat_paths } from "./lib/FileUtils";
   // color scheme
   apply_color_scheme();
 
@@ -11,7 +12,7 @@
     let matches = await getMatches();
     let base = matches.args["path"].value?.toString() || "";
     let path = window.location.pathname;
-    let file = base + path;
+    let file = concat_paths(base, path);
     let content = await loadFile(file);
     return [content, base];
   }
