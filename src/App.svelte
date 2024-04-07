@@ -2,6 +2,10 @@
   import { getMatches } from "@tauri-apps/api/cli";
   import MarkdownRenderer from "./components/MarkdownRenderer.svelte";
   import { loadFile } from "./lib/FileLoader";
+    import { apply_color_scheme } from "./lib/ColorUtil";
+  // color scheme
+  apply_color_scheme();
+
 
   async function getMarkdonwn(): Promise<[string, string]> {
     let matches = await getMatches();
@@ -19,7 +23,7 @@
     <p>Loading...</p>
   {:then [content, workspace]}
     <!-- promise was fulfilled -->
-    <MarkdownRenderer markdown_text={content} workspace={workspace} />
+    <MarkdownRenderer markdown_text={content} {workspace} />
   {:catch error}
     <!-- promise was rejected -->
     <p>{error}</p>

@@ -245,20 +245,42 @@
     }
 }
 
-@media screen {
-    $primary-font-color: #000000;
-    $secondary-font-color: #5c5b5b;
-    $primary-background-color: #FBFAEE;
-    $secondary-background-color: darken($primary-background-color, 50%);
-    $secondary-background-color: #{$secondary-background-color}10;
-    $primary-accent-color: #933DC9;
-    $secondary-accent-color: #53118F;
+@font-face {
+    font-family: "Nunito Sans";
+    // url("../public/JetBrainsMono-Regular.ttf");
+    src: url("/NunitoSans-Italic-VariableFont_YTLC\,opsz\,wdth\,wght.ttf");
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100,
+        "YTLC" 500;
+}
+@font-face {
+    font-family: "JetBrains";
+    // url("../public/JetBrainsMono-Regular.ttf");
+    src: url("/JetBrainsMono-Regular.ttf");
+}
+// @font-face {
+//     font-family: "JetBrains Special Glyphs";
+//     // url("../public/JetBrainsMono-Regular.ttf");
+//     src: url("/JetBrainsMono-Regular.ttf");
+//     unicode-range: U+2DU+3E;
+// }
 
+@mixin screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color) {
     @include md($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
-    @import url("../public/JetBrainsMono-Regular.ttf");
 
     body {
-        font-family: "JetBrains Mono";
+        background-color: $primary-background-color;
+    }
+
+    html {
+        font-family: "Nunito Sans";
+        // font-family: "JetBrains";
+    }
+    code {
+        font-family: "JetBrains" !important;
     }
 
     .markdown-body {
@@ -269,5 +291,31 @@
                 color: $secondary-font-color;
             }
         }
+    }
+}
+@media screen and (prefers-color-scheme: light) {
+    // $primary-font-color: #000000;
+    // $secondary-font-color: #5c5b5b;
+    // $primary-background-color: #FBFAEE;
+    // $secondary-background-color: darken($primary-background-color, 50%);
+    // $secondary-background-color: #{$secondary-background-color}10;
+    $primary-font-color: #000000;
+    $secondary-font-color: #5c5c5c;
+    $primary-background-color: #FFFFFF;
+    $secondary-background-color: #beabc9;
+    $secondary-background-color: #{$secondary-background-color}80;
+    $primary-accent-color: #933DC9;
+    $secondary-accent-color: #53118F;
+
+    @include screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+    :root.dark {
+        $primary-font-color: #ededed;
+        $secondary-font-color: #9c9c9c;
+        $primary-background-color: #2e2e2e;
+        $secondary-background-color: #3a333d;
+        $secondary-background-color: #{$secondary-background-color}40;
+        $primary-accent-color: #933DC9;
+        $secondary-accent-color: #8f60bb;
+        @include screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
     }
 }
