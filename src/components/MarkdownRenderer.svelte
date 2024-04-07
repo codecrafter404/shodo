@@ -3,7 +3,6 @@
     import multimdTable from "markdown-it-multimd-table";
     import highlightjs from "markdown-it-highlightjs";
     import ancher from "markdown-it-anchor";
-    import "../markdown.scss";
     import "../../public/katex/katex.css";
     import link_plugin from "../markdown-it-plugins/LinkPlugin";
     import mermaid_plugin from "../markdown-it-plugins/MermaidPlugin";

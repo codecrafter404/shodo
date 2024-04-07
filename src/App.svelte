@@ -2,8 +2,9 @@
   import { getMatches } from "@tauri-apps/api/cli";
   import MarkdownRenderer from "./components/MarkdownRenderer.svelte";
   import { loadFile } from "./lib/FileLoader";
-    import { apply_color_scheme } from "./lib/ColorUtil";
-    import { concat_paths } from "./lib/FileUtils";
+  import { apply_color_scheme } from "./lib/ColorUtil";
+  import { concat_paths } from "./lib/FileUtils";
+  import "./main_style.scss"
   // color scheme
   apply_color_scheme();
 
@@ -27,6 +28,7 @@
     <MarkdownRenderer markdown_text={content} {workspace} />
   {:catch error}
     <!-- promise was rejected -->
+    <p>File browser here</p>
     <p>{error}</p>
   {/await}
 </main>
