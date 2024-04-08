@@ -29,6 +29,7 @@
     body {
         background-color: $primary-background-color;
         color: $primary-font-color;
+        transition: 200ms;
     }
 
     html {
@@ -49,7 +50,16 @@
         }
     }
 }
-@media screen and (prefers-color-scheme: light) {
+@mixin convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color) {
+        --primary-font-color: #{$primary-font-color};
+        --secondary-font-color: #{$secondary-font-color};
+        --primary-background-color: #{$primary-background-color};
+        --secondary-background-color: #{$secondary-background-color};
+        --primary-accent-color: #{$primary-accent-color};
+        --secondary-accent-color: #{$secondary-accent-color};
+}
+@media screen {
+    
     // $primary-font-color: #000000;
     // $secondary-font-color: #5c5b5b;
     // $primary-background-color: #FBFAEE;
@@ -64,14 +74,18 @@
     $secondary-accent-color: #53118F;
 
     @include screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+    :root {
+        @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+    }
     :root.dark {
         $primary-font-color: #ededed;
         $secondary-font-color: #9c9c9c;
         $primary-background-color: #2e2e2e;
-        $secondary-background-color: #3a333d;
+        $secondary-background-color: #453e48;
         $secondary-background-color: #{$secondary-background-color}40;
         $primary-accent-color: #933DC9;
         $secondary-accent-color: #8f60bb;
         @include screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+        @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
     }
 }

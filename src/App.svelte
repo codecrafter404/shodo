@@ -5,6 +5,7 @@
   import { apply_color_scheme } from "./lib/ColorUtil";
   import { concat_paths } from "./lib/FileUtils";
   import "./main_style.scss"
+    import NavBar from "./components/NavBar.svelte";
   // color scheme
   apply_color_scheme();
 
@@ -18,20 +19,22 @@
     return [content, base];
   }
 </script>
-
-<main class="container">
-  {#await getMarkdonwn()}
-    <!-- promise is pending -->
-    <p>Loading...</p>
-  {:then [content, workspace]}
-    <!-- promise was fulfilled -->
-    <MarkdownRenderer markdown_text={content} {workspace} />
-  {:catch error}
-    <!-- promise was rejected -->
-    <p>File browser here</p>
-    <p>{error}</p>
-  {/await}
-</main>
+<div>
+  <NavBar />
+  <main class="container">
+    {#await getMarkdonwn()}
+      <!-- promise is pending -->
+      <p>Loading...</p>
+    {:then [content, workspace]}
+      <!-- promise was fulfilled -->
+      <MarkdownRenderer markdown_text={content} {workspace} />
+    {:catch error}
+      <!-- promise was rejected -->
+      <p>File browser here</p>
+      <p>{error}</p>
+    {/await}
+  </main>
+</div>
 
 <style>
   .container {
