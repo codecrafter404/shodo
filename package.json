@@ -19,6 +19,7 @@
     "markdown-it-multimd-table": "^4.2.3",
     "mermaid": "^10.9.0",
     "parse-domain": "^8.0.2",
+    "tauri-plugin-fs-watch-api": "github:tauri-apps/tauri-plugin-fs-watch#1b5db098baee370c039ed12c8c43b0ab03314e03",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
