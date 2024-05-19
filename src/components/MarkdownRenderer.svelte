@@ -7,7 +7,7 @@
     import link_plugin from "../markdown-it-plugins/LinkPlugin";
     import mermaid_plugin from "../markdown-it-plugins/MermaidPlugin";
     import mermaid from "mermaid";
-    import { afterUpdate } from "svelte";
+    import { afterUpdate, onDestroy } from "svelte";
     import katex_plugin from "../markdown-it-plugins/KatexPlugin";
     import image_plugin from "../markdown-it-plugins/ImagePlugin";
     import heading_link_plugin from "../markdown-it-plugins/HeadingLinksPlugin";
@@ -81,10 +81,21 @@
         }
     }
     afterUpdate(()=> {
-        let elem = document.querySelector(window.location.hash);
-        if (elem != null) {
-            elem.scrollIntoView();
+        if(window.location.hash !== "") {
+            let elem = document.querySelector(window.location.hash);
+            if (elem != null) {
+                elem.scrollIntoView();
+            }
         }
+        let current_pos = window.location;
+        setTimeout(()=> {
+            if (current_pos === window.location) {
+                let pos = sessionStorage.getItem("scrollpos");
+                if(pos !== null) {
+                    window.scrollTo(0, parseInt(pos));
+                }
+            }
+        }, 300) //TODO: not hardcode
     })
 </script>
 

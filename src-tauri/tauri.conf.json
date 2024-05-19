@@ -64,6 +64,12 @@
           "index": 1,
           "required": true,
           "takesValue": true
+        },
+        {
+          "name": "notify",
+          "description": "will TURN OFF automatic page refresh when file in workspace change",
+          "short": "n",
+          "multipleOccurrences": false
         }
       ]
     }
