@@ -11,7 +11,7 @@ export default function heading_link_plugin(md: MarkdownIt): void {
     md.core.ruler.push('heading_link', parse);
 }
 function parse(state: StateCore): boolean {
-    console.log(state)
+    // console.log(state)
     for (let i = 0; i < state.tokens.length; i++) {
         let currentToken = state.tokens[i];
         if (currentToken.type !== "heading_close") {
@@ -61,7 +61,7 @@ function parse(state: StateCore): boolean {
                     if (proto !== undefined) {
                         img = proto[2];
                         is_full_image = proto[1];
-                        console.log(uri);
+                        // console.log(uri);
                     } else if (is_web) {
                         img = link_logo;
                         let domain = parseDomain(uri.hostname);

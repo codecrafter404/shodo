@@ -69,7 +69,7 @@
         event.preventDefault();
         let link = target.getAttribute("href") || "/";
         let file = concat_paths(workspace, link);
-        console.log(file);
+        // console.log(file);
         try {
             await open(file);
         } catch (e: any) {
