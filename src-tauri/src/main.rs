@@ -54,7 +54,7 @@ async fn watch_files(window: Window, matches: Matches) -> color_eyre::Result<()>
                 .unwrap_or_default();
             let location = location.trim().replace("\\", "/");
             println!("File changed: {:?}", location);
-            window.eval(&format!("window.location.pathname = '{}'", location))?;
+            window.eval(&format!("window.location.pathname = '{}'; window.location.hash = '';", location))?;
         }
     }
     Ok(())

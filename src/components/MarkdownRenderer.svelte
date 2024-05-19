@@ -80,6 +80,12 @@
             });
         }
     }
+    afterUpdate(()=> {
+        let elem = document.querySelector(window.location.hash);
+        if (elem != null) {
+            elem.scrollIntoView();
+        }
+    })
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
