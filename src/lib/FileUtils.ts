@@ -1,6 +1,6 @@
 
 export function normalize_path(path: string): string {
-    return path.replaceAll("\\", "/");
+    return decodeURI(path).replaceAll("\\", "/");
 }
 export function concat_paths(p1: string, p2: string): string{
     p1 = normalize_path(p1);
