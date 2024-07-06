@@ -51,7 +51,7 @@
       "windows": {
         "wix": {
           "fragmentPaths": ["installer\\registry.wxs"],
-          "componentRefs": ["OpenHereKeys"]
+          "componentRefs": ["OpenHereKeys", "OpenHereKeysOnDirectoryClick"]
         }
       },
       "icon": [

@@ -7,106 +7,85 @@
       <!-- groups together the registry entries to be installed -->
       <!-- Note the unique `Id` we provide here -->
       <Component Id="OpenHereKeys" Guid="*">
-        <!-- the registry key will be under
-             HKEY_CURRENT_USER\Software\MyCompany\MyApplicationName -->
-        <!-- Tauri uses the second portion of the
-             bundle identifier as the `MyCompany` name
-             (e.g. `tauri-apps` in `com.tauri-apps.test`)  -->
         <RegistryKey
-          Root="HKEY_CLASSES_ROOT"
+          Root="HKCR"
           Key="directory\background\shell\Shodo-Notes (reading mode)"
-          Action="createAndRemoveOnUninstall"
         >
-          <!-- values to persist on the registry -->
+          <RegistryValue Type="string"
+            Value="Open Shodo-Notes here (reading mode)" />
           <RegistryValue
             Type="string"
             Name="Icon"
             Value="C:\Program Files\shodo\shodo.exe"
             KeyPath="yes"
           />
-          <RegistryValue Type="string" Value="Default Value"
-            value="Open Shodo-Notes here (reading mode)" />
+          <RegistryKey
+            Key="command"
+          >
+            <RegistryValue Type="string"
+              Value="&quot;C:\Program Files\shodo\shodo.exe&quot; &quot;%V&quot; -n" />
+          </RegistryKey>
         </RegistryKey>
         <RegistryKey
-          Root="HKEY_CLASSES_ROOT"
-          Key="directory\background\shell\Shodo-Notes (reading mode)\command"
-          Action="createAndRemoveOnUninstall"
-        >
-          <!-- values to persist on the registry -->
-          <RegistryValue Type="string" Value="Default Value"
-            value="&quot;C:\Program Files\shodo\shodo.exe&quot; &quot;%V&quot; -n" />
-        </RegistryKey>
-        <RegistryKey
-          Root="HKEY_CLASSES_ROOT"
+          Root="HKCR"
           Key="directory\background\shell\Shodo-Notes"
-          Action="createAndRemoveOnUninstall"
         >
+          <RegistryValue Type="string"
+            Value="Open Shodo-Notes here" />
           <!-- values to persist on the registry -->
+          <RegistryValue
+            Type="string"
+            Name="Icon"
+            Value="C:\Program Files\shodo\shodo.exe"
+          />
+          <RegistryKey
+            Key="command"
+          >
+            <!-- values to persist on the registry -->
+            <RegistryValue Type="string"
+              Value="&quot;C:\Program Files\shodo\shodo.exe&quot; &quot;%V&quot;" />
+          </RegistryKey>
+        </RegistryKey>
+      </Component>
+      <Component Id="OpenHereKeysOnDirectoryClick" Guid="*">
+        <RegistryKey
+          Root="HKCR"
+          Key="directory\shell\Shodo-Notes (reading mode)"
+        >
+          <RegistryValue Type="string"
+            Value="Open Shodo-Notes here (reading mode)" />
           <RegistryValue
             Type="string"
             Name="Icon"
             Value="C:\Program Files\shodo\shodo.exe"
             KeyPath="yes"
           />
-          <RegistryValue Type="string" Value="Default Value"
-            value="Open Shodo-Notes here" />
+          <RegistryKey
+            Key="command"
+          >
+            <RegistryValue Type="string"
+              Value="&quot;C:\Program Files\shodo\shodo.exe&quot; &quot;%V&quot; -n" />
+          </RegistryKey>
         </RegistryKey>
         <RegistryKey
-          Root="HKEY_CLASSES_ROOT"
-          Key="directory\background\shell\Shodo-Notes\command"
-          Action="createAndRemoveOnUninstall"
+          Root="HKCR"
+          Key="directory\shell\Shodo-Notes"
         >
-          <!-- values to persist on the registry -->
-          <RegistryValue Type="string" Value="Default Value"
-            value="&quot;C:\Program Files\shodo\shodo.exe&quot; &quot;%V&quot;" />
-        </RegistryKey>
-        <RegistryKey
-          Root="HKEY_CLASSES_ROOT"
-          Key="Directory\background\shell\Shodo-Notes (reading mode)"
-          Action="createAndRemoveOnUninstall"
-        >
+          <RegistryValue Type="string"
+            Value="Open Shodo-Notes here" />
           <!-- values to persist on the registry -->
           <RegistryValue
             Type="string"
             Name="Icon"
             Value="C:\Program Files\shodo\shodo.exe"
-            KeyPath="yes"
           />
-          <RegistryValue Type="string" Value="Default Value"
-            value="Open Shodo-Notes here (reading mode)" />
-        </RegistryKey>
-        <RegistryKey
-          Root="HKEY_CLASSES_ROOT"
-          Key="Directory\background\shell\Shodo-Notes (reading mode)\command"
-          Action="createAndRemoveOnUninstall"
-        >
-          <!-- values to persist on the registry -->
-          <RegistryValue Type="string" Value="Default Value"
-            value="&quot;C:\Program Files\shodo\shodo.exe&quot; &quot;%V&quot; -n" />
-        </RegistryKey>
-        <RegistryKey
-          Root="HKEY_CLASSES_ROOT"
-          Key="Directory\background\shell\Shodo-Notes"
-          Action="createAndRemoveOnUninstall"
-        >
-          <!-- values to persist on the registry -->
-          <RegistryValue
-            Type="string"
-            Name="Icon"
-            Value="C:\Program Files\shodo\shodo.exe"
-            KeyPath="yes"
-          />
-          <RegistryValue Type="string" Value="Default Value"
-            value="Open Shodo-Notes here" />
-        </RegistryKey>
-        <RegistryKey
-          Root="HKEY_CLASSES_ROOT"
-          Key="Directory\background\shell\Shodo-Notes\command"
-          Action="createAndRemoveOnUninstall"
-        >
-          <!-- values to persist on the registry -->
-          <RegistryValue Type="string" Value="Default Value"
-            value="&quot;C:\Program Files\shodo\shodo.exe&quot; &quot;%V&quot;" />
+          <RegistryKey
+            Key="command"
+          >
+            <!-- values to persist on the registry -->
+            <RegistryValue Type="string"
+              Value="&quot;C:\Program Files\shodo\shodo.exe&quot; &quot;%V&quot;" />
+          </RegistryKey>
         </RegistryKey>
       </Component>
     </DirectoryRef>
