@@ -87,7 +87,7 @@
 
     :root.dark {
         $primary-font-color: #ededed;
-        $secondary-font-color: #000000;
+        $secondary-font-color: #9c9c9c;
         $primary-background-color: #2e2e2e;
         $secondary-background-color: #453e48;
         $secondary-background-color: #{$secondary-background-color}40;
@@ -162,7 +162,7 @@
     }
 }
 
-@mixin print_colors_and_style($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color){
+@mixin print_colors_and_style($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color) {
 
     $secondary-background-color: #{$primary-font-color}12;
     @include md($primary-font-color, $secondary-font-color, $primary-font-color, $secondary-background-color, $primary-font-color, $primary-font-color);
@@ -177,11 +177,54 @@
     code {
         font-family: "JetBrains" !important;
         background-color: $primary-background-color !important;
-        border-width: 2px;
+        border-width: .15rem;
         border-color: $secondary-background-color;
     }
 
+    blockquote:not(.heading-link-blockquote) {
+        background-color: transparent !important;
+        border-left: .25rem solid $primary-accent-color;
+        border-radius: 0 .25rem .25rem 0;
+        border-width: .15rem .15rem .15rem .5rem;
+        border-color: $secondary-background-color $secondary-background-color $secondary-background-color $primary-font-color !important;
+    }
+
+    // apply to all child blockquotes of blockquotes upto unlimited depth
+    blockquote blockquote {
+        border-right-color: transparent !important;
+        border-right: 0rem solid !important;
+        border-radius: 0 !important;
+    }
+    blockquote::after {
+        background-color: red;
+        width: 2px;
+        content: "";
+        height: 100%;
+        position: absolute;
+        border-left: 2px solid red;
+    }
+
+    table {
+        thead {
+            background-color: transparent !important;
+
+            tr:first-of-type {
+                color: $primary-font-color;
+                border-bottom: $secondary-background-color 0rem solid;
+            }
+
+            tr {
+                color: $secondary-font-color;
+            }
+
+            tr:last-of-type {
+                border-bottom: $secondary-background-color .25rem solid;
+            }
+        }
+    }
+
 }
+
 @media print {
 
     // $primary-font-color: #000000;
