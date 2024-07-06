@@ -11,11 +11,13 @@
         "wdth" 100,
         "YTLC" 500;
 }
+
 @font-face {
     font-family: "JetBrains";
     // url("../public/JetBrainsMono-Regular.ttf");
     src: url("/JetBrainsMono-Regular.ttf");
 }
+
 // @font-face {
 //     font-family: "JetBrains Special Glyphs";
 //     // url("../public/JetBrainsMono-Regular.ttf");
@@ -25,17 +27,19 @@
 
 @mixin screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color) {
     @include md($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
-    
+
     body {
         background-color: $primary-background-color;
         color: $primary-font-color;
         transition: 200ms;
+        font-family: "Nunito Sans";
     }
 
     html {
         font-family: "Nunito Sans";
         // font-family: "JetBrains";
     }
+
     code {
         font-family: "JetBrains" !important;
     }
@@ -50,16 +54,18 @@
         }
     }
 }
+
 @mixin convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color) {
-        --primary-font-color: #{$primary-font-color};
-        --secondary-font-color: #{$secondary-font-color};
-        --primary-background-color: #{$primary-background-color};
-        --secondary-background-color: #{$secondary-background-color};
-        --primary-accent-color: #{$primary-accent-color};
-        --secondary-accent-color: #{$secondary-accent-color};
+    --primary-font-color: #{$primary-font-color};
+    --secondary-font-color: #{$secondary-font-color};
+    --primary-background-color: #{$primary-background-color};
+    --secondary-background-color: #{$secondary-background-color};
+    --primary-accent-color: #{$primary-accent-color};
+    --secondary-accent-color: #{$secondary-accent-color};
 }
+
 @media screen {
-    
+
     // $primary-font-color: #000000;
     // $secondary-font-color: #5c5b5b;
     // $primary-background-color: #FBFAEE;
@@ -74,12 +80,14 @@
     $secondary-accent-color: #53118F;
 
     @include screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+
     :root {
         @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
     }
+
     :root.dark {
         $primary-font-color: #ededed;
-        $secondary-font-color: #9c9c9c;
+        $secondary-font-color: #000000;
         $primary-background-color: #2e2e2e;
         $secondary-background-color: #453e48;
         $secondary-background-color: #{$secondary-background-color}40;
@@ -88,9 +96,94 @@
         @include screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
         @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
     }
+}
+
+@mixin print_layout() {
+    .nav-bar {
+        display: none !important;
+    }
+
+    code {
+        break-inside: avoid;
+        overflow-x: clip !important;
+        break-before: avoid;
+    }
+
+    .mermaid {
+        break-inside: avoid;
+    }
+
+    @for $i from 2 through 6 {
+        h#{$i} {
+            break-after: avoid;
+            break-inside: avoid;
+        }
+    }
+
+    h1 {
+
+        break-after: avoid;
+        break-inside: avoid;
+        break-before: page;
+    }
+
+    img {
+        break-inside: avoid;
+    }
+
+    table {
+        break-inside: avoid;
+    }
+
+    .heading-link-blockquote {
+        display: none;
+    }
+
+    .katex-html>.base {
+        break-inside: avoid;
+    }
+
+    blockquote {
+        break-inside: avoid;
+        break-before: avoid;
+    }
+
+    ul {
+        break-before: avoid;
+        break-inside: avoid;
+    }
+
+    ol {
+        break-before: avoid;
+    }
+
+    p {
+        orphans: 5;
+    }
+}
+
+@mixin print_colors_and_style($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color){
+
+    $secondary-background-color: #{$primary-font-color}12;
+    @include md($primary-font-color, $secondary-font-color, $primary-font-color, $secondary-background-color, $primary-font-color, $primary-font-color);
+
+    body {
+        background-color: $primary-background-color;
+        color: $primary-font-color;
+        transition: 200ms;
+        font-family: "Arial";
+    }
+
+    code {
+        font-family: "JetBrains" !important;
+        background-color: $primary-background-color !important;
+        border-width: 2px;
+        border-color: $secondary-background-color;
+    }
+
 }
 @media print {
-    
+
     // $primary-font-color: #000000;
     // $secondary-font-color: #5c5b5b;
     // $primary-background-color: #FBFAEE;
@@ -104,19 +197,22 @@
     $primary-accent-color: #933DC9;
     $secondary-accent-color: #53118F;
 
-    @include screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
-    :root {
-        @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
-    }
-    :root.dark {
-        $primary-font-color: #ededed;
-        $secondary-font-color: #9c9c9c;
-        $primary-background-color: #2e2e2e;
-        $secondary-background-color: #453e48;
-        $secondary-background-color: #{$secondary-background-color}40;
-        $primary-accent-color: #933DC9;
-        $secondary-accent-color: #8f60bb;
+    @include print_layout();
+
+    :root.pdf {
         @include screen_layout($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
         @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+    }
+
+    :root {
+        $primary-font-color: #000000;
+        $secondary-font-color: #5c5c5c;
+        $primary-background-color: #FFFFFF;
+        $secondary-background-color: #beabc9;
+        $secondary-background-color: #{$secondary-background-color}80;
+        $primary-accent-color: #933DC9;
+        $secondary-accent-color: #53118F;
+        @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+        @include print_colors_and_style($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
     }
 }

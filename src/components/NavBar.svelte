@@ -21,7 +21,7 @@
 </script>
 
 <div
-    class="w-full flex justify-between px-10 py-1 bg-secondary-background items-center"
+    class="w-full flex justify-between px-10 py-1 bg-secondary-background items-center nav-bar"
 >
     <div class="">
         <img src="/logo.svg" alt="" class="max-h-[4rem]"/>
