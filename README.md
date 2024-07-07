@@ -57,6 +57,10 @@ a highly opinionated markdown reader.
 - How to navigate in the app?
     - by updating a file in the working directory
     - by clicking on the folders displayed in navbar
+- How to print the current page (as pdf)?
+    > to print the page select the printing mode int the nav bar
+    > - pdf: is visually apealing but doesn't contain personal 'notes' like the headline chips, for exporting as pdf
+    > - paper: same as pdf, but less visuals, for printing on paper
 
 # How to build?
 ## Prerequestits
