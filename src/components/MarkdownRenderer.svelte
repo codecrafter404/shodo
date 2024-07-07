@@ -17,6 +17,20 @@
     import { message } from "@tauri-apps/api/dialog";
     import { concat_paths } from "../lib/FileUtils";
 
+    // print optimization
+    window.document.title = "‎";
+
+    function on_key_press(event: KeyboardEvent) {
+        if (event.ctrlKey && event.code == "KeyP") {
+            event.preventDefault();
+            let url = window.location.href.slice(window.location.origin.length);
+            history.replaceState(history.state, "", "/");
+            print();
+            history.replaceState(history.state, "", url);
+        }
+    }
+    window.document.documentElement.addEventListener("keydown", on_key_press);
+
     const md = new MarkdownIt({
         html: true,
         linkify: true,
@@ -80,23 +94,29 @@
             });
         }
     }
-    afterUpdate(()=> {
-        if(window.location.hash !== "") {
+    afterUpdate(() => {
+        if (window.location.hash !== "") {
             let elem = document.querySelector(window.location.hash);
             if (elem != null) {
                 elem.scrollIntoView();
             }
         }
         let current_pos = window.location;
-        setTimeout(()=> {
+        setTimeout(() => {
             if (current_pos === window.location) {
                 let pos = sessionStorage.getItem("scrollpos");
-                if(pos !== null) {
+                if (pos !== null) {
                     window.scrollTo(0, parseInt(pos));
                 }
             }
-        }, 300) //TODO: not hardcode
-    })
+        }, 300); //TODO: not hardcode
+    });
+    onDestroy(() => {
+        window.document.documentElement.removeEventListener(
+            "keydown",
+            on_key_press,
+        );
+    });
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

@@ -30,9 +30,8 @@
     {:then [content, workspace]}
       <!-- promise was fulfilled -->
       <MarkdownRenderer markdown_text={content} {workspace} />
-    {:catch error}
+    {:catch _}
       <!-- promise was rejected -->
-      <p>{error}</p>
       <FileBrowser />
     {/await}
   </main>

@@ -252,23 +252,3 @@
         @include print_colors_and_style($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
     }
 }
-
-@page {
-    @bottom-center {
-        content: "Exported by Shodo-Notes";
-    }
-
-    @top-center {
-        content: "hello world";
-    }
-
-    @bottom-left {
-
-        content: "hello world";
-    }
-
-    @bottom-left-corner {
-
-        content: "hello world";
-    }
-}
