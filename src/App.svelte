@@ -7,8 +7,10 @@
   import "./main_style.scss";
   import NavBar from "./components/NavBar.svelte";
   import FileBrowser from "./components/FileBrowser.svelte";
+  import { apply_print_mode } from "./lib/PrintModeUtils";
   // color scheme
   apply_color_scheme();
+  apply_print_mode();
 
   async function getMarkdonwn(): Promise<[string, string]> {
     let base = await get_workspace();

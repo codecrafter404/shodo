@@ -5,6 +5,12 @@
         switch_darkmode,
     } from "../lib/ColorUtil";
     import { normalize_path } from "../lib/FileUtils";
+    import {
+        alternate_print_modes,
+        apply_print_mode,
+        get_current_print_mode,
+        PrintMode,
+    } from "../lib/PrintModeUtils";
     let darkmode = is_darkmode();
     function darkmode_switch() {
         darkmode = switch_darkmode();
@@ -22,26 +28,10 @@
         if (path === "") path = "/";
         document.location.pathname = path;
     }
-    enum PrintMode {
-        pdf = "pdf",
-        paper = "",
-    }
-    let current_print_mode: PrintMode = PrintMode.pdf;
-    function alternate_print_modes() {
-        let modes = [PrintMode.paper, PrintMode.pdf];
-        let cidx = modes.findIndex((x) => x == current_print_mode);
-        if (cidx + 1 >= modes.length) {
-            cidx = 0;
-        } else {
-            cidx++;
-        }
-        if (current_print_mode != "") {
-            document.documentElement.classList.remove(current_print_mode);
-        }
-        current_print_mode = modes[cidx];
-        if (current_print_mode != "") {
-            document.documentElement.classList.add(current_print_mode);
-        }
+    let current_print_mode = get_current_print_mode();
+    function alter_print_mode() {
+        current_print_mode = alternate_print_modes();
+        apply_print_mode();
     }
 </script>
 
@@ -67,7 +57,7 @@
             <button
                 class="p-2 rounded-[.25rem] button bg-opacity-10 button"
                 title="Switch between print modes (PDF/Paper)"
-                on:click={alternate_print_modes}
+                on:click={alter_print_mode}
             >
                 <div
                     class="scheme-icon"

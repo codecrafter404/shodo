@@ -160,6 +160,7 @@
     p {
         orphans: 5;
     }
+
 }
 
 @mixin print_colors_and_style($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color) {
@@ -194,14 +195,6 @@
         border-right-color: transparent !important;
         border-right: 0rem solid !important;
         border-radius: 0 !important;
-    }
-    blockquote::after {
-        background-color: red;
-        width: 2px;
-        content: "";
-        height: 100%;
-        position: absolute;
-        border-left: 2px solid red;
     }
 
     table {
@@ -247,7 +240,7 @@
         @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
     }
 
-    :root {
+    :root.paper {
         $primary-font-color: #000000;
         $secondary-font-color: #5c5c5c;
         $primary-background-color: #FFFFFF;
@@ -257,5 +250,25 @@
         $secondary-accent-color: #53118F;
         @include convert-to-variables($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
         @include print_colors_and_style($primary-font-color, $secondary-font-color, $primary-background-color, $secondary-background-color, $primary-accent-color, $secondary-accent-color);
+    }
+}
+
+@page {
+    @bottom-center {
+        content: "Exported by Shodo-Notes";
+    }
+
+    @top-center {
+        content: "hello world";
+    }
+
+    @bottom-left {
+
+        content: "hello world";
+    }
+
+    @bottom-left-corner {
+
+        content: "hello world";
     }
 }
