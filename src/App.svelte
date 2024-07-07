@@ -4,12 +4,11 @@
   import { get_workspace, loadFile } from "./lib/FileLoader";
   import { apply_color_scheme } from "./lib/ColorUtil";
   import { concat_paths } from "./lib/FileUtils";
-  import "./main_style.scss"
-    import NavBar from "./components/NavBar.svelte";
-    import FileBrowser from "./components/FileBrowser.svelte";
+  import "./main_style.scss";
+  import NavBar from "./components/NavBar.svelte";
+  import FileBrowser from "./components/FileBrowser.svelte";
   // color scheme
   apply_color_scheme();
-
 
   async function getMarkdonwn(): Promise<[string, string]> {
     let base = await get_workspace();
@@ -19,6 +18,7 @@
     return [content, base];
   }
 </script>
+
 <div>
   <NavBar />
   <main class="container">

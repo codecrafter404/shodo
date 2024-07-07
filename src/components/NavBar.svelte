@@ -22,6 +22,27 @@
         if (path === "") path = "/";
         document.location.pathname = path;
     }
+    enum PrintMode {
+        pdf = "pdf",
+        paper = "",
+    }
+    let current_print_mode: PrintMode = PrintMode.pdf;
+    function alternate_print_modes() {
+        let modes = [PrintMode.paper, PrintMode.pdf];
+        let cidx = modes.findIndex((x) => x == current_print_mode);
+        if (cidx + 1 >= modes.length) {
+            cidx = 0;
+        } else {
+            cidx++;
+        }
+        if (current_print_mode != "") {
+            document.documentElement.classList.remove(current_print_mode);
+        }
+        current_print_mode = modes[cidx];
+        if (current_print_mode != "") {
+            document.documentElement.classList.add(current_print_mode);
+        }
+    }
 </script>
 
 <div
@@ -42,28 +63,19 @@
         {/each}
     </div>
     <div class="flex space-x-2">
-        <div class="">
+        <div class="relative">
             <button
                 class="p-2 rounded-[.25rem] button bg-opacity-10 button"
+                title="Switch between print modes (PDF/Paper)"
+                on:click={alternate_print_modes}
             >
                 <div
                     class="scheme-icon"
-                    style="--icon: url({'/icons/printer.svg'})"
+                    style="--icon: url({current_print_mode == PrintMode.paper
+                        ? '/icons/print-mode-selection/printer.svg'
+                        : '/icons/print-mode-selection/file-type-pdf.svg'})"
                 ></div>
             </button>
-            <div
-                class="absolute origin-bottom-left  left-0 z-10 bg-primary-background rounded-md ring-primary-accent ring-2 m-4 p-2"
-            >
-                asdf asdf asdf asdf
-                <ul>
-                    <li>asdf</li>
-                    <li>asdf</li>
-                    <li>asdf</li>
-                    <li>asdf</li>
-                    <li>asdf</li>
-                    <li>asdf</li>
-                </ul>
-            </div>
         </div>
         <button
             class="p-2 rounded-[.25rem] button bg-opacity-10"
