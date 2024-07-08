@@ -17,7 +17,7 @@ a highly opinionated markdown reader.
     > [](/attachements/test.md/hello.docx)
     > [](attachements/test.md/hello.xlsx)
     > [](attachements/test.md/cat.jpg)
-    > [](onenote:https://gykl-my.sharepoint.com/personal/ybbfs9q8k63a_gykl_onmicrosoft_com/Documents/Bio/1.%20Genetik.one#1.4%20Die%20MENDEL'schen%20Regeln&section-id={6508ACFE-0AA7-4F1F-8619-E607B21DB3F0}&page-id={4B1559CB-2145-4CE9-8841-C9CDB4EE3ADF}&end)
+    > [](onenote:👻)
     > [](/content/index.md)
     ```
     ![](/images/headline_chips.png)
