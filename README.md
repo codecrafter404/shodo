@@ -61,7 +61,12 @@ a highly opinionated markdown reader.
     > to print the page select the printing mode int the nav bar
     > - pdf: is visually apealing but doesn't contain personal 'notes' like the headline chips, for exporting as pdf
     > - paper: same as pdf, but less visuals, for printing on paper
-
+- How to specify the size of an image?
+  ```markdown
+  [this is a cat=200x](https://example.com/cat.jpg)
+  [this is a cat=x200](https://example.com/cat.jpg)
+  [this is a cat=300x200](https://example.com/cat.jpg)
+  ```
 # How to build?
 ## Prerequestits
 - Windows
