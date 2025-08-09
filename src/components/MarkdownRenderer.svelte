@@ -67,9 +67,13 @@
     async function on_click(event: PointerEvent) {
         let target = event.target as HTMLElement;
         // event.preventDefault();
-        // console.log(event);
+        console.log(event);
 
-        if (target.getAttribute("open") !== "app" || target.nodeName !== "A") {
+        if (
+            (target.getAttribute("open") !== "app" &&
+                target.getAttribute("open") !== "proto") ||
+            target.nodeName !== "A"
+        ) {
             if (
                 target.parentElement !== null &&
                 target.parentElement.getAttribute("open") === "app" &&
@@ -80,10 +84,15 @@
                 return;
             }
         }
+        let file = "";
         event.preventDefault();
-        let link = target.getAttribute("href") || "/";
-        let file = concat_paths(workspace, link);
-        // console.log(file);
+        if (target.getAttribute("open") === "app") {
+            let link = target.getAttribute("href") || "/";
+            file = concat_paths(workspace, link);
+        } else if (target.getAttribute("open") === "proto") {
+            file = target.getAttribute("href") || "";
+        }
+        console.log("file", file);
         try {
             await open(file);
         } catch (e: any) {

@@ -18,12 +18,16 @@
       },
       "fs": {
         "all": true,
-        "scope": ["**"]
+        "scope": [
+          "**"
+        ]
       },
       "protocol": {
         "all": false,
         "asset": true,
-        "assetScope": ["**"]
+        "assetScope": [
+          "**"
+        ]
       },
       "dialog": {
         "all": false,
@@ -32,6 +36,9 @@
         "message": true,
         "open": false,
         "save": false
+      },
+      "window": {
+        "print": true
       }
     },
     "windows": [
@@ -50,8 +57,13 @@
       "identifier": "me.4o4.shodo",
       "windows": {
         "wix": {
-          "fragmentPaths": ["installer\\registry.wxs"],
-          "componentRefs": ["OpenHereKeys", "OpenHereKeysOnDirectoryClick"]
+          "fragmentPaths": [
+            "installer\\registry.wxs"
+          ],
+          "componentRefs": [
+            "OpenHereKeys",
+            "OpenHereKeysOnDirectoryClick"
+          ]
         }
       },
       "icon": [
